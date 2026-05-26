@@ -1,0 +1,43 @@
+{
+  "summary": "Iteration 2 end-to-end testing complete. Backend: 17/17 pytest cases pass — health, /api/languages (9 langs with Hindi first + highlight=Hindi), /api/services, /api/contact CRUD+validation, full admin auth flow (login wrong/correct password, /admin/me with/without/bad token, admin GET/DELETE contact with auth gating, sort desc by created_at, 404 on missing id, logout invalidates token). Resend integration confirmed in backend logs ('Resend email sent: <id>' for successful sends; rate-limit/other errors are caught and logged without bubbling to client — POST /api/contact still returns 201). Frontend: brand rename complete (no 'Lumen' anywhere — navbar + footer show 'Individual Stake'); nav-link-work present; Work + Testimonials sections + all four case-highlight tiles + three testimonial cards render; Hindi marquee item shows Devanagari (हिन्दी) with (Hindi) latin label and lang-highlight-* testid resolves. /admin route: login form visible, wrong password shows 'Invalid password' toast and stays on login; correct password 'stake-admin-2025' loads dashboard with 5 submissions, rows clickable update detail panel, delete reduces count from 5 to 4, sign-out clears localStorage and returns to login. Token persists as 'is_admin_token' (43 chars).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Admin LoginCard",
+        "issue": "Back-to-site link uses 'inline-flex ... mb-8' which is inline-level, so the following 'ADMIN' overline span doesn't break to a new line. Renders as 'Back to siteADMIN' on a single line. Change Link to 'flex' (or 'inline-flex w-fit') and remove mb-8 in favor of mb-8 on a wrapper, or set the Link to block-level.",
+        "selector": "[data-testid=\"admin-back-home\"] + span",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Optional/low priority) Fix Admin LoginCard layout: 'Back to site' link and 'ADMIN' overline currently appear on the same line because the Link is inline-flex with mb-8. Make it block/flex (or wrap)."
+  ],
+  "critical_code_review_comments": [
+    "server.py: ADMIN_SESSIONS is an in-memory dict — every backend restart/redeploy logs every admin out and discards tokens. Acceptable for an MVP single-instance preview but should be persisted (Mongo or signed JWT) before production / horizontal scaling.",
+    "server.py: _send_notification_email is launched via asyncio.create_task(...) inside the request handler — the task is fire-and-forget and not retained anywhere, which can trigger 'Task was destroyed but it is pending' warnings in some event-loop configurations and also makes the task uncancellable on shutdown. Consider holding a reference set or using a small background worker.",
+    "Resend rate-limit (2 req/sec) is already being hit during burst testing and the failures are correctly logged and not surfaced to the client — but in real bursts a percentage of enquiries will silently not email the operator. Consider a tiny in-memory queue or retry-with-backoff inside _send_notification_email.",
+    "Admin.jsx: fetchAll() has 'selected' in its useCallback dependency array but is only invoked once via useEffect with [] (lint-disabled). That's intentional, but every render still recreates the callback. Minor; consider useRef for selected or remove the dep.",
+    "Admin.jsx: window.confirm() for delete is fine functionally but breaks the visual design system (uses browser native dialog). Consider using the existing shadcn AlertDialog for consistency."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "Admin password: stake-admin-2025 (read from /app/memory/test_credentials.md)",
+  "seed_data_creation": "Backend pytest seeds TEST_-prefixed contact submissions in MongoDB; one is deleted by the delete-test and one row was deleted by the UI test. ~4 TEST_-prefixed docs remain in contact_submissions for next agent to clean up if desired.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend regression suite at /app/backend/tests/backend_test.py now covers iteration 2 (admin auth + admin contact CRUD + Hindi-first /languages). REACT_APP_BACKEND_URL is read from env (no default). Admin token TTL = 8 hours, stored in process memory only — re-login if backend restarted between test runs. /admin route does NOT mount the Lenis smooth-scroll wrapper, so standard Playwright clicks work. All listed data-testids resolve. Resend emails are real and being delivered — keep test traffic low to stay under Resend's 2 req/sec limit.",
+  "rca of the issue": "Only a minor UI/CSS oversight in Admin login card: 'inline-flex' on the back-link doesn't force a line-break before the next 'ADMIN' overline. Visual-only; no functional impact."
+}

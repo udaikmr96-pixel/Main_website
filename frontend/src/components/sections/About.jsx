@@ -7,16 +7,16 @@ const ABOUT_IMG_2 =
 
 const values = [
   {
-    title: "Made by hand",
-    text: "No theme dumps, no template factories. Every line of code and pixel is considered.",
+    title: "Skin in the game",
+    text: "We don't just deliver — we stake our reputation on outcomes you can measure.",
   },
   {
     title: "Multilingual by default",
-    text: "We think globally from day one — copy, UX and SEO designed to cross borders.",
+    text: "Hindi + 8 more. We think globally from day one — copy, UX and SEO designed to cross borders.",
   },
   {
     title: "Automation as leverage",
-    text: "We build systems that work while you sleep, so the team can focus on what matters.",
+    text: "We build systems that work while you sleep, so you can focus on what only you can do.",
   },
 ];
 
@@ -64,21 +64,23 @@ export default function About() {
                 data-testid="about-headline"
                 className="font-display mt-6 text-4xl md:text-5xl lg:text-6xl tracking-tight font-light leading-[1.05]"
               >
-                A small studio with a wide tongue
-                <span className="text-neutral-500">.</span>
+                One operator. Nine tongues.
+                <span className="text-neutral-500"> Skin in the game.</span>
               </h2>
               <div className="mt-8 space-y-5 text-neutral-300 text-base md:text-lg leading-relaxed max-w-2xl">
                 <p>
-                  Lumen Works is a senior, independent practice. We pair the
-                  craft of a design studio with the rigour of an engineering
-                  team — and we speak in eight languages so your message
-                  doesn’t get lost in translation.
+                  Individual Stake is a senior, independent practice — pairing
+                  the craft of a design studio with the rigour of an
+                  engineering team. We work across nine languages (with
+                  particular fluency in Hindi and English) so your message
+                  doesn't get lost in translation.
                 </p>
                 <p>
-                  We partner with founders, agencies, and lean marketing teams
-                  to ship websites that convert, automations that reclaim
-                  hours, and content that lands in the reader’s native
-                  cadence.
+                  We partner with founders, HR & ops leaders, and lean
+                  marketing teams to ship websites that convert, automations
+                  that reclaim hours, and content that lands in the reader's
+                  native cadence. The name says it — when we take a project,
+                  we take a stake.
                 </p>
               </div>
             </motion.div>

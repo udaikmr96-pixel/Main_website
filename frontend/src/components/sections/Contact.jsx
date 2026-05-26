@@ -99,11 +99,11 @@ export default function Contact() {
                 Email
               </div>
               <a
-                href="mailto:hello@lumen.works"
+                href="mailto:uk@individualstake.com"
                 data-testid="contact-email-link"
                 className="mt-2 inline-block text-white hover:text-neutral-300"
               >
-                hello@lumen.works
+                uk@individualstake.com
               </a>
             </div>
             <div>

@@ -26,6 +26,10 @@ body {
   font-feature-settings: "ss01";
 }
 
+.font-devanagari {
+  font-family: "Tiro Devanagari Hindi", "Outfit", serif;
+}
+
 ::selection {
   background: #ffffff;
   color: #050505;

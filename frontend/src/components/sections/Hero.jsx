@@ -29,7 +29,7 @@ export default function Hero() {
         >
           <span className="inline-flex items-center gap-3 text-xs tracking-[0.25em] uppercase text-neutral-400 font-medium">
             <span className="block w-8 h-px bg-neutral-500" />
-            A digital craft studio · est. 2025
+            A studio for ambitious individuals · est. 2025
           </span>
 
           <h1
@@ -42,9 +42,10 @@ export default function Hero() {
           </h1>
 
           <p className="mt-8 max-w-xl text-base md:text-lg text-neutral-300 leading-relaxed">
-            Lumen Works is a small, senior studio building bespoke websites,
-            workflow automations, and multilingual content for ambitious teams
-            who care how things feel — not just how they ship.
+            Individual Stake is a senior, independent practice for ambitious
+            individuals and teams. We build bespoke websites, automate the
+            workflows that drain your days, and write across nine languages —
+            with a special soft spot for Hindi.
           </p>
 
           <motion.div
@@ -95,7 +96,7 @@ export default function Hero() {
             </div>
             <div>
               <div className="text-3xl font-display font-light text-white">
-                8
+                9
               </div>
               <div className="mt-1 normal-case tracking-normal text-neutral-500">
                 languages spoken

@@ -2,6 +2,7 @@ import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 
 const QUICK_LINKS = [
   { href: "#services", label: "Services" },
+  { href: "#work", label: "Work" },
   { href: "#about", label: "About" },
   { href: "#process", label: "Process" },
   { href: "#contact", label: "Contact" },
@@ -25,16 +26,17 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <span className="block w-2 h-2 bg-white rounded-full" />
               <span className="font-display tracking-tight text-lg font-medium">
-                Lumen Works
+                Individual Stake
               </span>
             </div>
             <p className="mt-5 text-neutral-400 max-w-sm leading-relaxed text-sm">
-              An independent studio designing websites, automating workflows
-              and translating brands across eight languages.
+              A studio for ambitious individuals. Websites, automations and
+              multilingual content — built with skin in the game across 9
+              languages.
             </p>
             <div className="mt-8 flex items-center gap-4 text-neutral-400">
               <a
-                href="mailto:hello@lumen.works"
+                href="mailto:uk@individualstake.com"
                 aria-label="Email"
                 data-testid="footer-social-email"
                 className="hover:text-white transition"
@@ -114,14 +116,14 @@ export default function Footer() {
 
         <div
           aria-hidden
-          className="font-display select-none text-[18vw] leading-none font-bold tracking-tighter text-white/[0.06] whitespace-nowrap text-center md:text-left"
+          className="font-display select-none text-[15vw] leading-none font-bold tracking-tighter text-white/[0.06] whitespace-nowrap text-center md:text-left"
         >
-          LUMEN WORKS
+          INDIVIDUAL STAKE
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-neutral-500">
           <div>
-            © {new Date().getFullYear()} Lumen Works. All rights reserved.
+            © {new Date().getFullYear()} Individual Stake. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
             <span>Crafted with care.</span>

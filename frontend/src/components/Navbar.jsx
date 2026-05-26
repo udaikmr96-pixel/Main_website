@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 
 const links = [
   { href: "#services", label: "Services" },
+  { href: "#work", label: "Work" },
   { href: "#about", label: "About" },
   { href: "#process", label: "Process" },
   { href: "#contact", label: "Contact" },
@@ -36,7 +37,7 @@ export default function Navbar() {
         >
           <span className="block w-2 h-2 bg-white rounded-full group-hover:scale-150 transition-transform" />
           <span className="font-display tracking-tight text-base md:text-lg font-medium">
-            Lumen Works
+            Individual Stake
           </span>
         </a>
 
