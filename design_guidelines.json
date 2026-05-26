@@ -1,0 +1,145 @@
+{
+  "agency_name": "Lumen Works",
+  "tagline": "Design. Automate. Translate.",
+  "theme_mode": "dark",
+  "archetype": "Archetype 4 (Swiss & High-Contrast) + Archetype 5 (Luxury Dark)",
+  "visual_style": "Modern minimalist tech. Obsidian backgrounds, sharp white typography, 1px subtle borders, high contrast. No neon gradients, no generic purples/teals.",
+  "colors": {
+    "background": "#050505",
+    "surface": "#111111",
+    "surface_glass": "rgba(17, 17, 17, 0.6)",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "border_hover": "rgba(255, 255, 255, 0.3)",
+    "primary": "#FFFFFF",
+    "primary_foreground": "#000000",
+    "text_main": "#FFFFFF",
+    "text_muted": "#A1A1AA"
+  },
+  "typography": {
+    "heading_font": "Outfit",
+    "body_font": "Manrope",
+    "rules": {
+      "h1": "text-5xl sm:text-6xl tracking-tighter font-light",
+      "h2": "text-3xl sm:text-4xl tracking-tight font-medium",
+      "h3": "text-xl sm:text-2xl tracking-tight font-medium",
+      "body": "text-base text-neutral-400 leading-relaxed",
+      "overline": "text-xs tracking-[0.2em] uppercase text-neutral-500 font-bold"
+    }
+  },
+  "layout_spacing": {
+    "philosophy": "Asymmetric Bento grids, negative space, technical precision.",
+    "section_padding": "py-24 md:py-32 px-6 md:px-12 lg:px-24",
+    "card_padding": "p-8 md:p-10",
+    "grid_gap": "gap-8"
+  },
+  "pages_and_sections": [
+    {
+      "id": "home",
+      "name": "Hero Section",
+      "type": "Hero",
+      "layout": "Full viewport height (min-h-screen). Background image with black/50 overlay. Content left or center aligned.",
+      "components": "Navigation bar (glassmorphism sticky top), H1, Tagline, Primary CTA (Contact) button, scroll down indicator.",
+      "media": [
+        {
+          "type": "image",
+          "url": "https://static.prod-images.emergentagent.com/jobs/71fb6a3c-0c6d-4451-91be-bce1c9f179a2/images/8afe45ad6ccee9b39ad07a6f873bc2542f1fa7d157b9b445079cee848f919758.png",
+          "description": "Abstract cinematic light cutting through darkness",
+          "placement": "Background with bg-black/50 overlay"
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "name": "About Section",
+      "type": "Content Grid",
+      "layout": "Grid layout (grid-cols-1 lg:grid-cols-2 gap-12). Text on one side, stacked images on the other.",
+      "components": "Overline (ABOUT US), H2 (Story & Values), Body text. Images with subtle hover float effects.",
+      "media": [
+        {
+          "type": "image",
+          "url": "https://images.pexels.com/photos/7674640/pexels-photo-7674640.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "description": "Creative team working in minimalist dark office",
+          "placement": "Primary about image, rounded-lg or sharp corners with 1px border"
+        },
+        {
+          "type": "image",
+          "url": "https://images.pexels.com/photos/3137084/pexels-photo-3137084.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "description": "Modern minimalist architecture",
+          "placement": "Secondary decorative image, overlapping or below primary"
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "name": "Services Section",
+      "type": "Bento Grid",
+      "layout": "grid-cols-1 lg:grid-cols-3 gap-6",
+      "components": "3 major cards. Each card contains an image covering the top half (or background with gradient fade to bottom), H3, and service description list.",
+      "media": [
+        {
+          "type": "image",
+          "url": "https://static.prod-images.emergentagent.com/jobs/71fb6a3c-0c6d-4451-91be-bce1c9f179a2/images/5cbecd9109a345141751a6581c872ebbce2c89eece289a9295c0408d5c7727dd.png",
+          "description": "Web Design & Hosting representation",
+          "placement": "Service Card 1"
+        },
+        {
+          "type": "image",
+          "url": "https://static.prod-images.emergentagent.com/jobs/71fb6a3c-0c6d-4451-91be-bce1c9f179a2/images/90b594d1aeec6e23303a948bdd7c171d3a2d7d256083a3dc5c173fe3da26aca8.png",
+          "description": "Workflow Automation representation",
+          "placement": "Service Card 2"
+        },
+        {
+          "type": "image",
+          "url": "https://static.prod-images.emergentagent.com/jobs/71fb6a3c-0c6d-4451-91be-bce1c9f179a2/images/921d81ded598595b653b11c33be40fcb1c46f8b43743ad454475bf27b3abcfc2.png",
+          "description": "Linguistic Services representation",
+          "placement": "Service Card 3"
+        }
+      ]
+    },
+    {
+      "id": "marquee",
+      "name": "Languages Marquee",
+      "type": "Marquee",
+      "layout": "Full width, zero padding vertical. Overflow hidden.",
+      "components": "react-fast-marquee. Text: 'ENGLISH — SPANISH — FRENCH — GERMAN — PORTUGUESE — ARABIC — MANDARIN — JAPANESE'. Style: text-5xl to text-7xl, text-transparent bg-clip-text outline-white (stroke) or text-neutral-800."
+    },
+    {
+      "id": "process",
+      "name": "How We Work",
+      "type": "Timeline",
+      "layout": "Vertical line connecting 4 steps. Left side step number, right side content.",
+      "components": "Step cards with 1px border. Steps: 1. Discovery, 2. Strategy & Design, 3. Development & Automation, 4. Global Launch."
+    },
+    {
+      "id": "contact",
+      "name": "Contact Section",
+      "type": "Form",
+      "layout": "Grid split: Left side large CTA text 'Let's build the future.', right side Shadcn form.",
+      "components": "Form with inputs: Name, Email, Company, Service Interest (Select), Message (Textarea). Use Shadcn Input, Select, Textarea, Button. Ensure focus states have contrast."
+    },
+    {
+      "id": "footer",
+      "name": "Footer",
+      "type": "Footer",
+      "layout": "Top border, massive brand text, standard grid for links.",
+      "components": "Massive 'LUMEN WORKS' at text-[12vw] font-bold. Quick links and social icons (lucide-react)."
+    }
+  ],
+  "motion_guidelines": {
+    "scroll": "Use Lenis for smooth scroll (MANDATORY).",
+    "animations": "Framer motion for section entry (fade in and translate Y).",
+    "interactions": "Hover states on cards: slight scale (1.02) or translateY (-4px), border color brightens."
+  },
+  "testing": {
+    "attributes": "Add data-testid to all forms, inputs, buttons, and navigation links. Ex: data-testid='contact-submit-button'"
+  },
+  "instructions_to_main_agent": [
+    "Use pure HTML/Tailwind for marketing layouts. Use Shadcn for complex interactives (Select, Form, etc).",
+    "Install lenis, framer-motion, react-fast-marquee, lucide-react.",
+    "Do NOT use Inter for headings. Use Outfit for headings and Manrope for body text.",
+    "Never use purely transparent headers. Add backdrop-blur-xl and bg-black/60.",
+    "Ensure dark mode is forced. Background is #050505.",
+    "Create anchor links in the nav that smoothly scroll to sections using Lenis or standard scroll behavior.",
+    "Images MUST NOT exceed 80vh on mobile."
+  ]
+}
