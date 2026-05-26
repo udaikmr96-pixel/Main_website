@@ -43,14 +43,16 @@ function LoginCard({ onLogin }) {
         <Link
           to="/"
           data-testid="admin-back-home"
-          className="inline-flex items-center gap-2 text-xs text-neutral-500 hover:text-white transition mb-8"
+          className="inline-flex w-fit items-center gap-2 text-xs text-neutral-500 hover:text-white transition mb-8"
         >
           <ArrowLeft size={14} />
           Back to site
         </Link>
-        <span className="text-xs tracking-[0.25em] uppercase text-neutral-500 font-semibold">
-          Admin
-        </span>
+        <div>
+          <span className="text-xs tracking-[0.25em] uppercase text-neutral-500 font-semibold">
+            Admin
+          </span>
+        </div>
         <h1 className="font-display mt-4 text-3xl md:text-4xl tracking-tight font-light">
           Individual Stake
         </h1>
