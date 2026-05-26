@@ -21,7 +21,7 @@ const SERVICES = [
     no: "02",
     title: "Workflow Automation",
     image:
-      "https://static.prod-images.emergentagent.com/jobs/71fb6a3c-0c6d-4451-91be-bce1c9f179a2/images/90b594d1aeec6e23303a948bdd7c171d3a2d7d256083a3dc5c173fe3da26aca8.png",
+      "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     desc: "Connect the tools you already use, eliminate busywork, and unlock leverage. Automations engineered to pay for themselves in weeks.",
     items: [
       "Process discovery & mapping",

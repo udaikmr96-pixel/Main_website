@@ -111,7 +111,7 @@ export default function Contact() {
                 Working hours
               </div>
               <div className="mt-2 text-neutral-300">
-                Mon — Fri · 09:00 – 18:00 CET
+                Mon — Fri · 9:00 AM – 5:00 PM IST
               </div>
             </div>
             <div>
@@ -119,8 +119,22 @@ export default function Contact() {
                 Based in
               </div>
               <div className="mt-2 text-neutral-300">
-                Remote · serving teams worldwide
+                New Delhi · serving teams worldwide
               </div>
+            </div>
+            <div>
+              <div className="text-xs uppercase tracking-[0.25em] text-neutral-500">
+                Prefer a quick call?
+              </div>
+              <a
+                href="https://calendar.app.google/aaGHwWa5TSftLRKF6"
+                target="_blank"
+                rel="noreferrer"
+                data-testid="contact-book-call-link"
+                className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-black bg-white hover:bg-neutral-200 px-5 py-2.5 rounded-full transition"
+              >
+                Book a 30-min call →
+              </a>
             </div>
           </div>
         </motion.div>

@@ -5,20 +5,20 @@ const TESTIMONIALS = [
   {
     quote:
       "Took ownership the day they joined. Within months, 90% of our HR ops ran themselves and the team finally had room to think strategically.",
-    name: "HR Director",
-    role: "Mid-market services firm",
+    name: "Country Manager — HR",
+    role: "Video gaming company",
   },
   {
     quote:
       "Launched our CRM in eight weeks flat, then quietly fixed the ATS we'd been complaining about for a year. Skin in the game is not a slogan here.",
-    name: "Head of Talent",
-    role: "Growth-stage scaleup",
+    name: "CEO",
+    role: "Healthcare staffing",
   },
   {
     quote:
-      "The website looked sharp, but the real win was the multilingual content — our Hindi & English pages convert at completely different rates now.",
+      "The e-commerce website they built for our patisserie is genuinely great — fast, beautiful, and the multilingual product pages convert at completely different rates across Hindi and English audiences.",
     name: "Founder",
-    role: "D2C brand, India",
+    role: "Patisserie company",
   },
 ];
 

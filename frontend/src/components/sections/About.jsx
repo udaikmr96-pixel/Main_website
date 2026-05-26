@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
 const ABOUT_IMG_1 =
-  "https://images.pexels.com/photos/7674640/pexels-photo-7674640.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+  "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 const ABOUT_IMG_2 =
-  "https://images.pexels.com/photos/3137084/pexels-photo-3137084.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+  "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 
 const values = [
   {

@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 
 const QUICK_LINKS = [
   { href: "#services", label: "Services" },
@@ -13,6 +13,12 @@ const SERVICE_LINKS = [
   { href: "#services", label: "Workflow Automation" },
   { href: "#services", label: "Linguistic Services" },
 ];
+
+const WHATSAPP_NUMBER = "919210283191"; // +91 92102 83191
+const WHATSAPP_MSG = encodeURIComponent(
+  "Hi Individual Stake — I'd like to discuss a project.",
+);
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
 export default function Footer() {
   return (
@@ -44,34 +50,15 @@ export default function Footer() {
                 <Mail size={18} />
               </a>
               <a
-                href="https://twitter.com"
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Twitter"
-                data-testid="footer-social-twitter"
-                className="hover:text-white transition"
+                aria-label="WhatsApp"
+                data-testid="footer-social-whatsapp"
+                className="inline-flex items-center gap-2 text-sm hover:text-white transition border border-white/15 hover:border-white px-3 py-1.5 rounded-full"
               >
-                <Twitter size={18} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-                data-testid="footer-social-linkedin"
-                className="hover:text-white transition"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-                data-testid="footer-social-github"
-                className="hover:text-white transition"
-              >
-                <Github size={18} />
+                <MessageCircle size={16} />
+                <span>WhatsApp</span>
               </a>
             </div>
           </div>
