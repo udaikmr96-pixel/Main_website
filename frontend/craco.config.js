@@ -84,4 +84,14 @@ webpackConfig.devServer = (devServerConfig) => {
 // Wrap with visual edits (automatically adds babel plugin, dev server, and overlay in dev mode)
 if (isDevServer)
 
+  const path = require("path");
+
+webpackConfig.resolve = {
+  ...(webpackConfig.resolve || {}),
+  alias: {
+    ...(webpackConfig.resolve?.alias || {}),
+    "@": path.resolve(__dirname, "src"),
+  },
+};
+
 module.exports = webpackConfig;
