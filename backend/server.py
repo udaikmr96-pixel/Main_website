@@ -14,39 +14,39 @@ from datetime import datetime, timezone, timedelta
 import httpx
 
 
-    ROOT_DIR = Path(__file__).parent
-    load_dotenv(ROOT_DIR / '.env')
+ROOT_DIR = Path(__file__).parent
+load_dotenv(ROOT_DIR / '.env')
 
     # Configure logging early
-    logging.basicConfig(
+logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
-    logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
     # MongoDB
-    mongo_url = os.environ['MONGO_URL']
-    client = AsyncIOMotorClient(mongo_url)
-    db = client[os.environ['DB_NAME']]
+mongo_url = os.environ['MONGO_URL']
+client = AsyncIOMotorClient(mongo_url)
+db = client[os.environ['DB_NAME']]
 
     # ============================================================
     # GOOGLE APPS SCRIPT
     # Paste your deployed Apps Script Web App URL below
     # ============================================================
-    GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwAsy2Zp2AnxNm_m3nAfDLrONFXicIDJzAPMUO0gGXF6XcwVEtZ05G0RB0mTuvks20x/exec"
+GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwAsy2Zp2AnxNm_m3nAfDLrONFXicIDJzAPMUO0gGXF6XcwVEtZ05G0RB0mTuvks20x/exec"
     # ============================================================
 
     # Admin auth (simple shared-password + signed token kept in-memory)
-    ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '')
-    ADMIN_SESSIONS: dict[str, datetime] = {}
-    SESSION_TTL = timedelta(hours=8)
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '')
+ADMIN_SESSIONS: dict[str, datetime] = {}
+SESSION_TTL = timedelta(hours=8)
 
-    app = FastAPI(title="Individual Stake API")
-    api_router = APIRouter(prefix="/api")
+app = FastAPI(title="Individual Stake API")
+api_router = APIRouter(prefix="/api")
 
 
     # --------- Models ---------
-    class ContactSubmissionCreate(BaseModel):
+class ContactSubmissionCreate(BaseModel):
         name: str = Field(..., min_length=1, max_length=120)
         email: EmailStr
         company: Optional[str] = Field(default="", max_length=160)
@@ -54,7 +54,7 @@ import httpx
         message: str = Field(..., min_length=1, max_length=4000)
 
 
-    class ContactSubmission(BaseModel):
+class ContactSubmission(BaseModel):
         model_config = ConfigDict(extra="ignore")
 
         id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -66,17 +66,17 @@ import httpx
         created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
-    class AdminLoginRequest(BaseModel):
+class AdminLoginRequest(BaseModel):
         password: str
 
 
-    class AdminLoginResponse(BaseModel):
+class AdminLoginResponse(BaseModel):
         token: str
         expires_at: datetime
 
 
     # --------- Helpers ---------
-    def _email_html(payload: ContactSubmission) -> str:
+def _email_html(payload: ContactSubmission) -> str:
         return f"""
         <table width="100%" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; background:#0a0a0a; color:#ffffff; padding: 24px; border-radius: 8px;">
         <tr><td>
@@ -96,7 +96,7 @@ import httpx
         """
 
 
-    async def _send_notification_email(submission: ContactSubmission) -> None:
+async def _send_notification_email(submission: ContactSubmission) -> None:
         if not (RESEND_API_KEY and RESEND_FROM_EMAIL and RESEND_TO_EMAIL):
             logger.info("Resend not configured — skipping email.")
             return
@@ -113,7 +113,7 @@ import httpx
         except Exception:
             logger.exception("Failed to send Resend notification email")
 
-    async def append_to_google_sheet(submission: ContactSubmission):
+async def append_to_google_sheet(submission: ContactSubmission):
         if not GOOGLE_APPS_SCRIPT_URL:
             logger.info("Google Sheets URL not configured.")
             return
@@ -138,14 +138,14 @@ import httpx
             logger.exception("Failed to write submission to Google Sheets")
             raise
 
-    def _issue_token() -> tuple[str, datetime]:
+def _issue_token() -> tuple[str, datetime]:
         token = secrets.token_urlsafe(32)
         expires = datetime.now(timezone.utc) + SESSION_TTL
         ADMIN_SESSIONS[token] = expires
         return token, expires
 
 
-    async def require_admin(authorization: Optional[str] = Header(default=None)) -> str:
+async def require_admin(authorization: Optional[str] = Header(default=None)) -> str:
         if not authorization or not authorization.lower().startswith("bearer "):
             raise HTTPException(status_code=401, detail="Missing bearer token")
         token = authorization.split(" ", 1)[1].strip()
@@ -157,13 +157,13 @@ import httpx
 
 
     # --------- Public Routes ---------
-    @api_router.get("/")
-    async def root():
+@api_router.get("/")
+async def root():
         return {"message": "Individual Stake API", "status": "ok"}
 
 
-    @api_router.get("/health")
-    async def health():
+@api_router.get("/health")
+async def health():
         try:
             await db.command("ping")
             return {"status": "ok", "db": "connected"}
@@ -171,8 +171,8 @@ import httpx
             raise HTTPException(status_code=503, detail=f"db unreachable: {e}")
 
 
-    @api_router.post("/contact", response_model=ContactSubmission, status_code=201)
-    async def create_contact(payload: ContactSubmissionCreate):
+@api_router.post("/contact", response_model=ContactSubmission, status_code=201)
+async def create_contact(payload: ContactSubmissionCreate):
         submission = ContactSubmission(**payload.model_dump())
         doc = submission.model_dump()
         doc['created_at'] = doc['created_at'].isoformat()
@@ -182,15 +182,15 @@ import httpx
             logger.exception("Failed to persist contact submission")
             raise HTTPException(status_code=500, detail="Could not save submission") from e
         # Fire-and-forget email (awaited but errors swallowed inside helper).
-                try:
-            await append_to_google_sheet(submission)
-        except Exception as e:
-            raise HTTPException(status_code=502, detail="Google Sheets CRM update failed") from e
-        return submission
+try:
+await append_to_google_sheet(submission)
+except Exception as e:
+raise HTTPException(status_code=502, detail="Google Sheets CRM update failed") from e
+return submission
 
 
-    @api_router.get("/services")
-    async def list_services():
+@api_router.get("/services")
+async def list_services():
         return {
             "services": [
                 {
@@ -230,8 +230,8 @@ import httpx
         }
 
 
-    @api_router.get("/languages")
-    async def list_languages():
+@api_router.get("/languages")
+async def list_languages():
         return {
             "languages": [
                 "Hindi", "English", "Spanish", "French", "German",
@@ -242,8 +242,8 @@ import httpx
 
 
     # --------- Admin Routes ---------
-    @api_router.post("/admin/login", response_model=AdminLoginResponse)
-    async def admin_login(payload: AdminLoginRequest):
+@api_router.post("/admin/login", response_model=AdminLoginResponse)
+async def admin_login(payload: AdminLoginRequest):
         if not ADMIN_PASSWORD:
             raise HTTPException(status_code=503, detail="Admin password not configured")
         # constant-time compare
@@ -253,19 +253,19 @@ import httpx
         return AdminLoginResponse(token=token, expires_at=expires)
 
 
-    @api_router.post("/admin/logout")
-    async def admin_logout(_token: str = Depends(require_admin)):
+@api_router.post("/admin/logout")
+async def admin_logout(_token: str = Depends(require_admin)):
         ADMIN_SESSIONS.pop(_token, None)
         return {"status": "ok"}
 
 
-    @api_router.get("/admin/me")
-    async def admin_me(_token: str = Depends(require_admin)):
+@api_router.get("/admin/me")
+async def admin_me(_token: str = Depends(require_admin)):
         return {"authenticated": True}
 
 
-    @api_router.get("/admin/contact", response_model=List[ContactSubmission])
-    async def list_contacts_admin(limit: int = 200, _token: str = Depends(require_admin)):
+@api_router.get("/admin/contact", response_model=List[ContactSubmission])
+async def list_contacts_admin(limit: int = 200, _token: str = Depends(require_admin)):
         docs = await db.contact_submissions.find({}, {"_id": 0}).sort("created_at", -1).to_list(limit)
         for d in docs:
             if isinstance(d.get('created_at'), str):
@@ -273,8 +273,8 @@ import httpx
         return docs
 
 
-    @api_router.delete("/admin/contact/{submission_id}")
-    async def delete_contact(submission_id: str, _token: str = Depends(require_admin)):
+@api_router.delete("/admin/contact/{submission_id}")
+async def delete_contact(submission_id: str, _token: str = Depends(require_admin)):
         result = await db.contact_submissions.delete_one({"id": submission_id})
         if result.deleted_count == 0:
             raise HTTPException(status_code=404, detail="Submission not found")
@@ -282,8 +282,8 @@ import httpx
 
 
     # Mount router and middleware
-    app.include_router(api_router)
-    app.add_middleware(
+app.include_router(api_router)
+app.add_middleware(
         CORSMiddleware,
         allow_credentials=True,
         allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
@@ -292,6 +292,6 @@ import httpx
     )
 
 
-    @app.on_event("shutdown")
-    async def shutdown_db_client():
+@app.on_event("shutdown")
+async def shutdown_db_client():
         client.close()
