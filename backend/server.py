@@ -1,17 +1,17 @@
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, Header
-    from dotenv import load_dotenv
-    from starlette.middleware.cors import CORSMiddleware
-    from motor.motor_asyncio import AsyncIOMotorClient
-    import os
-    import asyncio
-    import logging
-    import secrets
-    from pathlib import Path
-    from pydantic import BaseModel, Field, ConfigDict, EmailStr
-    from typing import List, Optional
-    import uuid
-    from datetime import datetime, timezone, timedelta
-        import httpx
+from dotenv import load_dotenv
+from starlette.middleware.cors import CORSMiddleware
+from motor.motor_asyncio import AsyncIOMotorClient
+import os
+import asyncio
+import logging
+import secrets
+from pathlib import Path
+from pydantic import BaseModel, Field, ConfigDict, EmailStr
+from typing import List, Optional
+import uuid
+from datetime import datetime, timezone, timedelta
+import httpx
 
 
     ROOT_DIR = Path(__file__).parent
