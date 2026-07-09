@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build: ./frontend
+    container_name: main-website
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+
+  backend:
+    build: ./backend
+    container_name: main-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8001"
